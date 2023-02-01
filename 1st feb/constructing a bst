@@ -1,0 +1,16 @@
+class Solution {
+
+    TreeNode adder(int []nums,int low,int high){
+        if(low>high){
+            return null;
+        }
+        int mid=(low+high)/2;
+        TreeNode curr=new TreeNode(nums[mid]);
+        curr.left=adder(nums,low,mid-1);
+        curr.right=adder(nums,mid+1,high);
+        return curr;
+    }
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return adder(nums,0,nums.length-1);
+    }
+}
