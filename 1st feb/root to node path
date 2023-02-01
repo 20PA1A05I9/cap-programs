@@ -1,0 +1,21 @@
+public class Solution {
+    private boolean result(TreeNode root,ArrayList<Integer>data,int x){
+        if(root==null){
+            return false;
+        }
+        data.add(root.val);
+        if(root.val==x){
+            return true;
+        }
+        if(result(root.left,data,x)||result(root.right,data,x)){
+            return true;
+        }
+        data.remove(data.size()-1);
+        return false;
+    }
+    public ArrayList<Integer> solve(TreeNode A, int B) {
+        ArrayList<Integer>data=new ArrayList<>();
+        result(A,data,B);
+        return data;
+    }
+}
