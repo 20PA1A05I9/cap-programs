@@ -1,0 +1,16 @@
+class Solution {
+    HashSet<Integer>map=new HashSet<>();
+    public boolean findTarget(TreeNode root, int k) {
+        if(root==null){
+            return false;
+        }
+        int data=root.val;
+        if(map.contains(k-data)){
+            return true;
+        }
+        else{
+            map.add(data);
+        }
+        return findTarget(root.left,k)||findTarget(root.right,k);
+    }
+}
