@@ -1,0 +1,30 @@
+public class BSTIterator{
+    private Stack<Node>s=new Stack<>();
+    public BSTIterator(Node root){
+        pushAll(root);
+    }
+    int next(){
+        Node curr=s.pop();
+        pushAll(curr.left);
+        return curr.data;
+    }
+    void pushAll(Node root){
+        Node curr=root;
+        while(curr!=null){
+            s.push(curr);
+            curr=curr.right;
+        }
+    }
+}
+class Solution
+{
+    // return the Kth largest element in the given BST rooted at 'root'
+    public int kthLargest(Node root,int K)
+    {
+        //Your code here
+        BSTIterator b=new BSTIterator(root);
+        for(int i=0;i<K-1;i++){
+            b.next();
+        }
+        return b.next();
+    }
