@@ -1,0 +1,33 @@
+class Solution {
+    int max=1;
+    private HashMap<Integer,Integer>map=new HashMap<>();
+    private ArrayList<Integer>data=new ArrayList<>();
+    void filler(TreeNode root){
+        if(root==null){
+            return;
+        }
+        if(map.containsKey(root.val)){
+            map.put(root.val,map.get(root.val)+1);
+            max=Math.max(max,map.get(root.val));
+        }
+        else{
+            map.put(root.val,1);
+        }
+        filler(root.left);
+        filler(root.right);
+    }
+    public int[] findMode(TreeNode root) {
+        filler(root);
+        for(Map.Entry<Integer,Integer>m:map.entrySet()){
+            if(m.getValue()==max){
+                data.add(m.getKey());
+            }
+        }
+        int[] arr = new int[data.size()];
+        int count=0;
+        for(int i:data){
+            arr[count++]=i;
+        }
+        return arr;
+    }
+}
