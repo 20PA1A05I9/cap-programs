@@ -1,0 +1,17 @@
+class Solution {
+    private void helper(TreeNode root,List<Integer>data,int index){
+        if(root==null){
+            return;
+        }
+        if(data.size()==index){
+            data.add(root.val);
+        }
+        helper(root.right,data,index+1);
+        helper(root.left,data,index+1);
+    }
+    public List<Integer> rightSideView(TreeNode root) {
+        ArrayList<Integer>data=new ArrayList<>();
+        helper(root,data,0);
+        return data;
+    }
+}
