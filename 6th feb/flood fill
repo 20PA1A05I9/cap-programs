@@ -1,0 +1,24 @@
+class Solution {
+    void fill(int[][] image,boolean[][]vis, int sr, int sc,int temp, int color){
+        vis[sr][sc]=true;
+        image[sr][sc]=color;
+        if(sc-1>=0&&!vis[sr][sc-1]&&image[sr][sc-1]==temp){
+            fill(image,vis,sr,sc-1,temp,color);
+        }
+        if(sr-1>=0&&!vis[sr-1][sc]&&image[sr-1][sc]==temp){
+            fill(image,vis,sr-1,sc,temp,color);
+        }
+        if(sc+1<image[0].length&&!vis[sr][sc+1]&&image[sr][sc+1]==temp){
+            fill(image,vis,sr,sc+1,temp,color);
+        }
+        if(sr+1<image.length&&!vis[sr+1][sc]&&image[sr+1][sc]==temp){
+            fill(image,vis,sr+1,sc,temp,color);
+        }
+    }
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        int temp=image[sr][sc];
+        boolean[][]vis=new boolean[image.length][image[0].length];
+        fill(image,vis,sr,sc,temp,color);
+        return image;
+    }
+}
