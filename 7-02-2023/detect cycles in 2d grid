@@ -1,0 +1,28 @@
+class Solution {
+    private boolean dfs(char[][]grid,int row,int col,char target,boolean[][]vis){
+        if(row<0||col<0||row>=grid.length||col>=grid[0].length||grid[row][col]!=target){
+            return false;
+        }
+        if(vis[row][col]){
+            return true;
+        }
+        vis[row][col]=true;
+        boolean result=false;
+        grid[row][col]='#';
+        result=result||dfs(grid,row-1,col,target,vis)||dfs(grid,row,col-1,target,vis)||dfs(grid,row+1,col,target,vis)||dfs(grid,row,col+1,target,vis);
+        grid[row][col]=target;
+        return result;
+    }
+    public boolean containsCycle(char[][] grid) {
+        int m=grid.length,n=grid[0].length;
+        boolean[][]vis=new boolean[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(!vis[i][j]&&dfs(grid,i,j,grid[i][j],vis)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
