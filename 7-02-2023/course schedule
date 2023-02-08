@@ -1,0 +1,35 @@
+class Solution {
+    public boolean canFinish(int numCourses, int[][] pre) {
+        List<List<Integer>>data=new ArrayList<>();
+        for(int i=0;i<numCourses;i++){
+            data.add(new ArrayList<Integer>());
+        }
+        for(int i=0;i<pre.length;i++){
+            data.get(pre[i][1]).add(pre[i][0]);
+        }
+        int[]freq=new int[numCourses];
+        for(int i=0;i<data.size();i++){
+            for(int j:data.get(i)){
+                freq[j]++;
+            }
+        }
+        Queue<Integer>q=new LinkedList<>();
+        for(int j=0;j<freq.length;j++){
+            if(freq[j]==0){
+                q.offer(j);
+            }
+        }
+        ArrayList<Integer>data1=new ArrayList<>();
+        while(!q.isEmpty()){
+            int a=q.poll();
+            data1.add(a);
+            for(int k:data.get(a)){
+                freq[k]--;
+                if(freq[k]==0){
+                    q.offer(k);
+                }
+            }
+        }
+        return data1.size()==numCourses;
+    }
+}
